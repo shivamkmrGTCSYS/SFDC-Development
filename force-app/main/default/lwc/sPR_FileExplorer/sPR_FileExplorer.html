@@ -1,0 +1,48 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 10-01-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+
+    <div class="container">
+        <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+               
+              <div class="slds-media__body">
+                <h2 class="slds-card__header-title">
+                    <span>File Explorer</span>
+                </h2>
+              </div> 
+            </header>
+          </div> 
+            <template if:false={isFolderData} >
+                <div class="slds-grid slds-gutters no-records">No Record Found</div>
+            </template>
+            <template if:true={isFolderData} >
+                <template if:false={isDocumentVisible}>
+                    <template for:each={folderData} for:item="folder">
+                        <article key={folder.Id} class="sldscard">  
+                                                      
+                            <div class="slds-card__body slds-card__body_inner">
+                                <div onclick={showDocument} data-filepath={folder.File_Path__c} data-awsfilekey={folder.AWS_File_Key__c} class="linkwrp doclink" >
+                                     {folder.File_Name__c}                        
+                                </div>
+                            </div>                             
+                          </article>                        
+                    </template>
+                </template>
+                <template if:true={isDocumentVisible}>
+                    <p>
+                        <iframe src={fileURL} height='500px' frameborder='0' width="100%" style="overflow: scroll!important;height:100vh;"></iframe>
+                    </p>
+                    <p>
+                        <button class="slds-button slds-button_brand" onclick={showDocumentList}>Back</button>
+                    </p>
+                </template>
+            </template>
+    </div>
+
+</template>

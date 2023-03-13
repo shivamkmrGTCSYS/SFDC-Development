@@ -1,0 +1,97 @@
+<!-- /*****************************************************************
+* Page Name: FilePreview
+* Created Date: 03-Nov-2020
+* Description: Page To show preview of aws files
+*******************************************************************/ -->
+
+<apex:page controller="SUN_FilePreviewController">
+
+    <head>
+        <apex:slds />
+        <style>
+            .filePreviewFrame {
+                width: 100%;
+                height: 80vh;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <apex:outputPanel rendered="{!if(ISNull(generatedFileUrl), false, true )}">
+            <div style="padding: 10px;">                  
+                <article class="slds-card">
+                    <div class="slds-card__header slds-grid">
+                        <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                            <div class="slds-media__figure">
+                                <span class="slds-icon_container slds-icon-standard-account" title="File Preview Page">
+                                    <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                                        <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            xlink:href="/apexpages/slds/latest/assets/icons/standard-sprite/svg/symbols.svg#account">
+                                        </use>
+                                    </svg>
+                                    <span class="slds-assistive-text">File Preview</span>
+                                </span>
+                            </div>
+                            <div class="slds-media__body">
+                                <h2 class="slds-card__header-title">
+                                    <a href="javascript:void(0);" class="slds-card__header-link slds-truncate"
+                                        title="File Preview">
+                                        <span>File Preview</span>
+                                    </a>
+                                </h2>
+                            </div>
+                            <div class="slds-no-flex">
+                                <a class="slds-button slds-button_neutral" href="{!fileUrl}">Download</a>
+                                <button class="slds-button slds-button_neutral" onclick="window.close();">Close</button>                                
+                            </div>
+                        </header>
+                    </div>
+					<div class="slds-card__body  "> 
+                    	<iframe src="{!generatedFileUrl}" class="filePreviewFrame" /> 
+                                     
+                    </div>
+                    <footer class="slds-card__footer">
+                        <!--<iframe src="{!generatedFileUrl}" class="filePreviewFrame" />-->
+                        <div class="slds-no-flex">
+                                <a class="slds-button slds-button_neutral" href="{!fileUrl}">Download</a>
+                                <button class="slds-button slds-button_neutral" onclick="window.close();">Close</button>                                
+                            </div>
+                    </footer>
+                </article>
+            </div>
+        </apex:outputPanel>
+        <apex:outputPanel rendered="{!if(ISNull(generatedFileUrl), true, false )}">
+            <!-- not supported screen starts here -->
+            <div class="demo-only" style="height:24rem">
+                <section role="alertdialog" tabindex="0" aria-labelledby="prompt-heading-id"
+                    aria-describedby="prompt-message-wrapper" class="slds-modal slds-fade-in-open slds-modal_prompt"
+                    aria-modal="true">
+                    <div class="slds-modal__container">
+                        <header class="slds-modal__header slds-theme_error slds-theme_alert-texture">
+                            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                                title="Close">
+                                <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        xlink:href="/apexpages/slds/latest/assets/icons//utility-sprite/svg/symbols.svg#close">
+                                    </use>
+                                </svg>
+                                <span class="slds-assistive-text">Close</span>
+                            </button>
+                            <h2 class="slds-text-heading_medium" id="prompt-heading-id">Service Unavailable</h2>
+                        </header>
+                        <div class="slds-modal__content slds-p-around_medium" id="prompt-message-wrapper"
+                            style="text-align: center">
+                            File does not exist or Invalid Url
+                        </div>
+                        <footer class="slds-modal__footer slds-theme_default">
+                            <button class="slds-button slds-button_neutral" onclick="window.close();">Back</button>
+                        </footer>
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+            </div>
+            <!-- not supported screen ends here -->
+        </apex:outputPanel>
+    </body>
+</apex:page>

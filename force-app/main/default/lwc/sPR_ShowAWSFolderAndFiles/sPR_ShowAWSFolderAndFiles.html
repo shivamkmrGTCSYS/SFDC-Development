@@ -1,0 +1,154 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 11-04-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+
+    <div class="container">
+
+        <template if:true={isFolder}>
+            <template if:false={isFolderData} >
+                <div class="slds-grid slds-gutters">No Record Found</div>
+            </template>
+            <template if:true={isFolderData} >
+                <template if:false={isDocumentVisible}>
+                    <template for:each={folderData} for:item="folder">
+                        <article key={folder.Id} class="sldscard">
+                             
+                            <div class="slds-card__body slds-card__body_inner">
+                                <div onclick={showDocument} data-filepath={folder.File_Path__c} data-awsfilekey={folder.AWS_File_Key__c} class="linkwrp doclink" >
+                                     {folder.File_Name__c}                        
+                                </div>
+                            </div>
+                             
+                          </article>
+                        
+                    </template>
+                </template>
+                <template if:true={isDocumentVisible}>
+                    <div class="demo-only demo-only--sizing slds-grid slds-wrap">
+                        <div class="slds-size_3-of-4">
+                            <p>
+                                <iframe src={fileURL} height='500px' frameborder='0' width="100%" style="overflow: scroll!important;height:100vh;"></iframe>
+                            </p>
+                        </div>
+                        <div class="slds-size_1-of-4">
+                            <div class="c-container2" > 
+                                <div class="card-margin" > 
+                                <article class="slds-card">
+                                    <div class="slds-card__header slds-grid slds-grid-header  ">
+                                    <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                        Notes
+                                    </header>
+                                    </div>
+                                    <div class="slds-card__body slds-card__body_inner slds-card__body_inner-header">
+                                        <lightning-layout-item class='body-recon' padding="around-small" size="12">
+                                            <template for:each={notes} for:item="note">
+                                            <div key={note.Id} class="slds-box slds-box_x-small slds-text-align_left slds-m-around_x-small">
+                                                <div class="slds-form-element">
+                                                <label class="slds-form-element__label" for="form-element-01"><b>Note :</b></label>
+                                                <div class="slds-form-element__control">
+                                                    <p>{note.Note__c} </p> 
+                                                </div>
+                                                </div>
+                                                <div class="slds-form-element">
+                                                <label class="slds-form-element__label" for="form-element-02"><b>Created Date :</b></label>
+                                                <div class="slds-form-element__control">
+                                                    <p> <lightning-formatted-date-time value={note.CreatedDate}></lightning-formatted-date-time></p> 
+                                                </div>
+                                                </div>
+                                                <div class="slds-form-element">
+                                                <label class="slds-form-element__label" for="form-element-02"><b>Created By :</b></label>
+                                                <div class="slds-form-element__control">
+                                                    <p> {note.CreatedBy.Name} </p> 
+                                                </div>
+                                                </div>
+                                                
+                                            </div>                    
+                                            </template>                  
+                                        </lightning-layout-item>
+                                        <template if:false={notsAvailable}>
+                                        <lightning-layout-item class='body-recon' padding="around-small" size="12">
+                                            <div   class=" slds-text-align_center slds-m-around_x-small notavailable ">Notes not available</div>
+                                        </lightning-layout-item>
+                                        </template>
+                                    </div>
+                                        
+                                </article>
+                                        
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p>
+                        <button class="slds-button slds-button_brand" onclick={showDocumentList}>Back</button>
+                    </p>
+                </template>
+            </template>
+        </template>
+        <template if:false={isFolder}>
+            <div class="demo-only demo-only--sizing slds-grid slds-wrap">
+                <div class="slds-size_3-of-4">
+                    <p>
+                        <iframe src={fileURL} height='100%' frameborder='0' width="100%" style="overflow: scroll!important;height:100vh;"></iframe>
+                    </p>
+                </div>
+                <div class="slds-size_1-of-4">
+                    <div class="c-container2" > 
+                        <div class="card-margin" > 
+                        <article class="slds-card">
+                            <div class="slds-card__header slds-grid slds-grid-header  ">
+                            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                Notes
+                            </header>
+                            </div>
+                            <div class="slds-card__body slds-card__body_inner slds-card__body_inner-header">
+                                <lightning-layout-item class='body-recon' padding="around-small" size="12">
+                                    <template for:each={notes} for:item="note">
+                                    <div key={note.Id} class="slds-box slds-box_x-small slds-text-align_left slds-m-around_x-small">
+                                        <div class="slds-form-element">
+                                        <label class="slds-form-element__label" for="form-element-01"><b>Note :</b></label>
+                                        <div class="slds-form-element__control">
+                                            <p>{note.Note__c} </p> 
+                                        </div>
+                                        </div>
+                                        <div class="slds-form-element">
+                                        <label class="slds-form-element__label" for="form-element-02"><b>Created Date :</b></label>
+                                        <div class="slds-form-element__control">
+                                            <p> <lightning-formatted-date-time value={note.CreatedDate}></lightning-formatted-date-time></p> 
+                                        </div>
+                                        </div>
+                                        <div class="slds-form-element">
+                                        <label class="slds-form-element__label" for="form-element-02"><b>Created By :</b></label>
+                                        <div class="slds-form-element__control">
+                                            <p> {note.CreatedBy.Name} </p> 
+                                        </div>
+                                        </div>
+                                        
+                                    </div>                    
+                                    </template>                  
+                                </lightning-layout-item>
+                                <template if:false={notsAvailable}>
+                                <lightning-layout-item class='body-recon' padding="around-small" size="12">
+                                    <div   class=" slds-text-align_center slds-m-around_x-small notavailable ">Notes not available</div>
+                                </lightning-layout-item>
+                                </template>
+                            </div>
+                                
+                        </article>
+                                
+                    </div>
+                    </div>
+                </div>
+            </div>
+            
+        </template>
+
+        <!--<iframe src={fileURL} height='100%' frameborder='0' width="100%" style="overflow: scroll!important;"></iframe>-->
+
+    </div>
+
+</template>

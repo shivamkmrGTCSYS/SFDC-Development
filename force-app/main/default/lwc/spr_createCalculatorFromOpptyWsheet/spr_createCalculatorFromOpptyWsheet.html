@@ -1,0 +1,12 @@
+<template>
+    <template if:true={loading} >
+        <div class="slds-m-aroung_small slds-align_absolute-center loading-div">
+            <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+        </div>
+    </template>
+    <template if:true={callout} >
+        <div style="margin:50px;">
+        <h4 class="slds-tree__group-header"  >{message}</h4>
+        </div>
+    </template>
+</template>

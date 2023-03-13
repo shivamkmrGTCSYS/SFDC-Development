@@ -1,0 +1,117 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 02-14-2023
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+  Modifications Log 
+  Ver   Date         Author                               Modification
+  1.0   02-26-2021   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
+-->
+<template> 
+
+    <div class="demo-only demo-only--sizing slds-grid slds-wrap">
+    <div class="slds-size_3-of-4">
+      <div class="c-container" >    
+          <lightning-layout multiple-rows="true" >  
+              <lightning-layout-item class='header-recon'   size="12" >             
+                  <div class="card-margin" > 
+                      <article class="slds-card">
+                          <div class="slds-card__header slds-grid slds-grid-header  ">
+                            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                              <div class="slds-media__figure">
+                                <span class="slds-icon_container slds-icon-standard-account" title="File Preview">
+                                  <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                                    <use xlink:href="/apexpages/slds/latest/assets/icons/standard-sprite/svg/symbols.svg#article"></use>
+                                  </svg>
+                                  <span class="slds-assistive-text">payment</span>
+                                </span>
+                              </div>
+                              <div class="slds-media__body">
+                                <h2 class="slds-card__header-title">
+                                  <span><a href={recordURI}>File Preview</a></span>
+                                </h2>
+                              </div>
+                              <div class="slds-no-flex">
+      
+                                <button class="slds-button slds-button_icon  " title="Refresh"                                
+                                    onclick={showfilePreview}>
+                                    <svg class="slds-button__icon" aria-hidden="true">
+                                        <use xlink:href="/apexpages/slds/latest/assets/icons/utility-sprite/svg/symbols.svg?cache=9.28.0#refresh"></use>
+                                    </svg>
+                                </button> &nbsp;&nbsp;
+                                <button class="slds-button slds-button_icon  " title="Download"                               
+                                    onclick={downloadFile} >
+                                    <svg class="slds-button__icon" aria-hidden="true">
+                                        <use xlink:href="/apexpages/slds/latest/assets/icons/utility-sprite/svg/symbols.svg?cache=9.28.0#download"></use>
+                                    </svg>
+                                </button>
+                                 
+                              </div>
+                            </header>
+                          </div>
+                          <div class="slds-card__body slds-card__body_inner slds-card__body_inner-header">
+                              <lightning-layout-item class='body-recon' padding="around-small" size="12">
+                                  <iframe src={fileUrl} width='100%' height="1200px" frameborder='0'></iframe>
+                              </lightning-layout-item>
+                          </div>
+                              
+                      </article>
+                              
+                  </div>
+      
+              </lightning-layout-item>  
+              
+              </lightning-layout>
+      </div>  
+    </div>
+    <div class="slds-size_1-of-4">
+      <div class="c-container2" > 
+        <div class="card-margin" > 
+          <article class="slds-card">
+            <div class="slds-card__header slds-grid slds-grid-header  ">
+              <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                Notes
+              </header>
+              </div>
+              <div class="slds-card__body slds-card__body_inner slds-card__body_inner-header">
+                  <lightning-layout-item class='body-recon' padding="around-small" size="12">
+                    <template for:each={notes} for:item="note">
+                      <div key={note.Id} class="slds-box slds-box_x-small slds-text-align_left slds-m-around_x-small">
+                        <div class="slds-form-element">
+                          <label class="slds-form-element__label" for="form-element-01"><b>Note :</b></label>
+                          <div class="slds-form-element__control">
+                            <p>{note.Note__c} </p> 
+                          </div>
+                        </div>
+                        <div class="slds-form-element">
+                          <label class="slds-form-element__label" for="form-element-02"><b>Created Date :</b></label>
+                          <div class="slds-form-element__control">
+                            <p> <lightning-formatted-date-time value={note.CreatedDate}></lightning-formatted-date-time></p> 
+                          </div>
+                        </div>
+                        <div class="slds-form-element">
+                          <label class="slds-form-element__label" for="form-element-02"><b>Created By :</b></label>
+                          <div class="slds-form-element__control">
+                            <p> {note.CreatedBy.Name} </p> 
+                          </div>
+                        </div>
+                         
+                      </div>                    
+                    </template>                  
+                  </lightning-layout-item>
+                  <template if:false={notsAvailable}>
+                  <lightning-layout-item class='body-recon' padding="around-small" size="12">
+                    <div   class=" slds-text-align_center slds-m-around_x-small notavailable ">Notes not available</div>
+                  </lightning-layout-item>
+                  </template>
+              </div>
+                  
+          </article>
+                  
+      </div>
+      </div>
+    </div>
+  </div>
+  
+      </template>

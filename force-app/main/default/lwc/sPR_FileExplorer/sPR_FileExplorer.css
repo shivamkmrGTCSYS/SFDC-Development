@@ -1,0 +1,25 @@
+.doclink{
+    padding: 10px;
+    background-color: #ebebe9;
+    border: 2px solid #ebebe9;
+    border-radius: 5px;
+    text-decoration: none!important;
+}
+.doclink:hover {
+    background-color: #fff;
+    border-color: #0000ff;
+    cursor: pointer;
+}
+.linkwrp{
+    padding:10px;
+    margin: 5px;
+}
+
+.container{
+    background: #fff;
+    padding: 10px;
+    border-radius: 5px;
+}
+.no-records{
+    padding: 10px;
+}

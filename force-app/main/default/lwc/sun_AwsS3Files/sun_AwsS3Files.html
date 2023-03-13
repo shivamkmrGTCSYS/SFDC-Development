@@ -1,0 +1,130 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 04-25-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+  Modifications Log 
+  Ver   Date         Author                               Modification
+  1.0   02-19-2021   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
+-->
+<template>
+
+    
+    <div class="slds-tree_container">
+        <template if:true={loading} >
+            <div class="slds-m-aroung_small slds-align_absolute-center loading-div">
+                <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+            </div>
+        </template>
+        <h4 class="slds-tree__group-header" id="treeheading">Splitero File</h4>
+        <ul aria-labelledby="treeheading" class="slds-tree" role="tree">
+        <template for:each={items} for:item="item">
+            <li key={item.name} aria-expanded={item.expanded} aria-label={item.label} aria-level="1" role="treeitem">
+                <div class="slds-tree__item">
+                    <button class="slds-button slds-button_icon slds-m-right_x-small" aria-hidden="true" 
+                        tabindex="-1"
+                        data-objectname={item.label}
+                        onclick={handleObjectLevel}
+                        title="Expand Tree Branch">
+                        <svg class="slds-button__icon slds-button__icon_small" aria-hidden="true">
+                            <use xlink:href="/apexpages/slds/latest/assets/icons/utility-sprite/svg/symbols.svg#chevronright"></use>
+                        </svg>
+                        <span class="slds-assistive-text">Expand Tree Branch</span>
+                    </button>
+                    <span class="slds-has-flexi-truncate">
+                        <span class="slds-tree__item-label slds-truncate" title="Tree Branch">{item.label}</span>
+                    </span>
+                </div>
+                <ul role="group">
+                    <template for:each={item.items} for:item="item2">
+                    <li key={item2.name} aria-expanded={item2.expanded} aria-label={item2.label} aria-level="2" role="treeitem">
+                        <div class="slds-tree__item">
+                            <button class="slds-button slds-button_icon slds-m-right_x-small" 
+                                aria-hidden="true"
+                                data-objectname={item.label}
+                                data-recordname={item2.label}
+                                onclick={handleRecordLevel}
+                                tabindex="-1" title="Expand Tree Branch">
+                                <svg class="slds-button__icon slds-button__icon_small" aria-hidden="true">
+                                    <use xlink:href="/apexpages/slds/latest/assets/icons/utility-sprite/svg/symbols.svg#chevronright"></use>
+                                </svg>
+                                <span class="slds-assistive-text">Expand Tree Branch</span>
+                            </button>
+                            <span class="slds-has-flexi-truncate">
+                                <span class="slds-tree__item-label slds-truncate" title="Tree Branch">{item2.label}</span>
+                            </span>
+                        </div>
+                        <ul role="group">
+                            <template for:each={item2.items} for:item="item3">
+                            <li key={item3.name} aria-expanded={item3.expanded} aria-label="Tree Branch" aria-level="3" role="treeitem">
+                                <div class="slds-tree__item">
+                                    <button class="slds-button slds-button_icon slds-m-right_x-small" 
+                                        aria-hidden="true"
+                                        data-objectname={item.label}
+                                        data-recordname={item2.label}
+                                        data-foldername={item3.label}
+                                        onclick={handleFolderLevel}
+                                        tabindex="-1" title="Expand Tree Branch">
+                                        <svg class="slds-button__icon slds-button__icon_small" aria-hidden="true">
+                                            <use xlink:href="/apexpages/slds/latest/assets/icons/utility-sprite/svg/symbols.svg#chevronright">
+                                            </use>
+                                        </svg>
+                                        <span class="slds-assistive-text">Expand Tree Branch</span>
+                                    </button>
+                                    <span class="slds-has-flexi-truncate">
+                                        <span class="slds-tree__item-label slds-truncate" title="Tree Branch">
+                                            <lightning-icon icon-name="doctype:folder" variant="bare" 
+                                                size="x-small" alternative-text="Folder" 
+                                                title={item.label}  ></lightning-icon>
+                                            &nbsp;&nbsp;
+                                            {item3.label}
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <button class="slds-button slds-button_icon  " title="Refresh" size='xx-small'
+                                                data-objectname={item.label}
+                                                data-recordname={item2.label}
+                                                data-foldername={item3.label}
+                                                onclick={refreshTimeline}>
+                                                <svg class="slds-button__icon" aria-hidden="true">
+                                                    <use xlink:href="/apexpages/slds/latest/assets/icons/utility-sprite/svg/symbols.svg?cache=9.28.0#refresh"></use>
+                                                </svg>
+                                            </button>
+                                        </span>
+                                    </span>
+                                </div>
+                                <ul role="group">
+                                    <template for:each={item3.items} for:item="item4">
+                                    <li  key={item4.name} aria-expanded={item4.expanded} aria-label="Tree Branch" aria-level="4" role="treeitem">
+                                        <div class="slds-tree__item">
+                                            <button class="slds-button slds-button_icon slds-m-right_x-small"
+                                                aria-hidden="true" tabindex="-1" title="Expand Tree Branch">
+                                                <svg class="slds-button__icon slds-button__icon_small"
+                                                    aria-hidden="true">
+                                                    <use
+                                                        xlink:href="/apexpages/slds/latest/assets/icons/utility-sprite/svg/symbols.svg#file">
+                                                    </use>
+                                                </svg>
+                                                <span class="slds-assistive-text">Expand Tree Branch</span>
+                                            </button>
+                                            <span class="slds-has-flexi-truncate">
+                                                <span class="slds-tree__item-label slds-truncate"
+                                                    title="Tree Branch">
+                                                    <a href={item4.href} target="_blank">{item4.label}</a>
+                                                </span>
+                                                        
+                                            </span>
+                                        </div> 
+                                    </li>
+                                </template>
+                                </ul>
+                            </li>
+                            </template>
+                        </ul>
+                    </li>
+                    </template>
+                </ul>
+            </li>
+        </template>
+        </ul>
+    </div>
+</template>

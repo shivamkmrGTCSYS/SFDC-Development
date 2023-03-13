@@ -1,0 +1,20 @@
+<!--
+  @description       : 
+  @author            : Ashwani Soni (Sundae)
+  @group             : 
+  @last modified on  : 12-09-2020
+  @last modified by  : Ashwani Soni (Sundae)
+  Modifications Log 
+  Ver   Date         Author                  Modification
+  1.0   12-01-2020   Ashwani Soni (Sundae)   Initial Version
+-->
+<aura:component implements="force:hasRecordId,force:lightningQuickAction,force:hasSObjectName,flexipage:availableForRecordHome,lightning:actionOverride">
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="sobjecttype" type="String" default="{!v.sObjectName}"/>
+    <c:sun_UploadFiletoAwsS3 recordId="{!v.recordId}" objectname="{!v.sobjecttype}"/>
+
+    <!--<c:sun_AwsFolderViewWC recordId="{!v.recordId}" objectname="{!v.sobjecttype}"/>-->
+    
+    <c:sun_AwsS3Files recordId="{!v.recordId}" objectname="{!v.sobjecttype}"/>
+    
+</aura:component>

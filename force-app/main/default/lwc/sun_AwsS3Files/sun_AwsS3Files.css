@@ -1,0 +1,18 @@
+.refreshRotate {
+    animation: rotate .4s linear infinite;
+} 
+.exampleHolder{
+    margin-top:50px;
+}
+.slds-tree_container{
+    background: #fff;
+    max-width: 1000px!important;
+    border-radius: 4px!important;
+    margin-top: 5px!important;
+    padding: 10px;
+
+}
+.loading-div{
+    position:relative;
+    margin-top: 8px;
+}

@@ -1,0 +1,18 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 04-21-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+    <template if:false={download} >
+      <div style="padding:50px;">Downloading...</div>
+    </template>
+    <template if:true={download} >
+      <div style="padding:50px;"> Click <a href={downloadURL}   target="_blank" >here</a> to download file, if download is not started!</div>
+    </template>
+    <template if:true={recordId}>
+      &nbsp;
+  </template>
+</template>

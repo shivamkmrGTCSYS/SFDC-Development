@@ -1,0 +1,31 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 11-10-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+    <lightning-quick-action-panel header={recordNameHeader}>
+         
+        <div class="slds-m-top_medium slds-m-bottom_x-large">
+             
+     
+            <div class="slds-p-around_medium lgc-bg">
+                <lightning-input type="text" label="Calculator Version Name" value={recordName} onchange={recordNameChange}></lightning-input>
+            </div>
+        </div>
+ 
+            <lightning-button variant="neutral" label="Cancel" onclick={closeAction}></lightning-button>
+            <lightning-button variant="brand" class="slds-m-left_x-small" label="Clone" onclick={cloneAction} ></lightning-button>
+         
+    </lightning-quick-action-panel>
+
+    <div class="loader">        
+              
+        <template if:false={isLoaded}>
+            <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+        </template>  
+    </div>
+
+</template>

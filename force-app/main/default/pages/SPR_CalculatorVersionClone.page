@@ -1,0 +1,16 @@
+<apex:page standardController="Calculator_Version__c" extensions="SPR_CalculatorVersionCloneController" >
+    
+    <apex:form >
+        <apex:sectionHeader title="{!Calculator_Version__c.Name}" subtitle="Clone record confirmation"/>
+        
+        Name : <apex:inputField value="{!Calculator_Version__c.Name}"/>
+        <br />
+        <br />
+        <!--<apex:pageMessage severity="info" summary="Click Clone to confirm you wish to clone this record."/>-->
+        
+        <apex:commandButton value="Clone" action="{!cloneCalculatorVersion}"/>
+        <apex:commandButton value="Cancel" action="{!cancel}"/>
+    </apex:form>
+    
+    
+</apex:page>

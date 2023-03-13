@@ -1,0 +1,19 @@
+<apex:page standardController="Opportunity" recordSetVar="accs" extensions="SPR_DownloadApplicationController" >
+    
+    <apex:includeScript value="/soap/ajax/18.0/connection.js"/>
+    <apex:outputPanel rendered="{!if(urlFound , true ,false)}">  
+        <div style="padding:50px;font-size:15px; "> 
+            
+    		Click <a href="{!downloadUrl}">here</a> to download file, if download is not started!
+            
+            <script>               
+                var downloadUrl= '{!downloadUrl}';                 
+                console.log(downloadUrl);          
+                var win = window.open(downloadUrl, "_blank");            
+            </script>
+            
+    	</div> 
+	</apex:outputPanel>
+    <apex:pageMessages ></apex:pageMessages>
+    
+</apex:page>
