@@ -27,7 +27,7 @@ public class SPR_Sync_AfterInsertAndUpdLeadController {
         Http http = new Http();
         HTTPResponse res = http.send(req);
         
-        system.debug('reponse 1===> '+res.getBody());
+        system.debug('res.getBody 1 ===> '+res.getBody());
         
         if(res.getStatusCode() == 200)
         {
